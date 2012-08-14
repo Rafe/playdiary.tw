@@ -1,0 +1,3 @@
+[submodule "wp-content/themes/wordpress-bootstrap"]
+	path = wp-content/themes/wordpress-bootstrap
+	url = git@github.com:Rafe/playdiary.tw-theme.git
