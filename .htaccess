@@ -67,6 +67,8 @@ RewriteRule ^(.*) "/home/jimmy/playdiary.tw/wp-content/cache/supercache/%{SERVER
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

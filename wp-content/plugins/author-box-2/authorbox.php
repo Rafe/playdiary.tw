@@ -3,7 +3,7 @@
 Plugin Name: Author Box Reloaded
 Plugin URI: http://wordpress.org/extend/plugins/author-box-2/
 Description: Adds an author box to your blog. From a Brian Gardner's article at http://smsh.me/7ngf. REQUIRES Wordpress Plugin Framework Reloaded installed.
-Version: 2.0.4.1 
+Version: 2.0.4.1
 Author: Lopo Lencastre de Almeida <dev@ipublicis.com>
 Author URI: http://ipublicis.com/
 Donate link: http://smsh.me/7kit
@@ -29,7 +29,7 @@ License: GNU GPL v3 or later
 /**
  * Check if the framework plugin is active
  */
-if( is_admin() ) { 
+if( is_admin() ) {
 	$required_plugin = 'wordpress-plugin-framework-reloaded/wordpress-plugin-framework-reloaded.php';
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( ! is_plugin_active( $required_plugin ) ) {
@@ -40,7 +40,7 @@ if( is_admin() ) {
 						"<p>".$dieMessage."</p>\n</p></div>\n";
 		add_action( 'admin_notices', create_function( '', "echo '$notice';" ) );
 		return;
-	} 
+	}
 }
 
 /**
@@ -56,7 +56,7 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 	 * @var authorBox - Static property to hold our singleton instance
 	 */
 	static $instance = false;
-	
+
 	/**
 	 * @array _known_sites - Author's social links defined by external plugins. Incl. plugins are for Twitter, Identi.ca, Facebook and Netlog
 	 */
@@ -89,7 +89,7 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 							<?php _e("Auto insert Author Box after article in single post view.", $this->_slug); ?>
 						</th>
 						<td>
-							<input name="ab2[auto_insert]" id="ab2_auto_insert" type="checkbox" 
+							<input name="ab2[auto_insert]" id="ab2_auto_insert" type="checkbox"
 							       value="yes"<?php checked('yes', $this->_settings['ab2']['auto_insert']) ?>>
 							<label for="ab2_auto_insert">
 								<?php _e("Auto insert.", $this->_slug); ?>
@@ -109,7 +109,7 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 							<?php _e("Photo Alignment", $this->_slug);?>
 						</th>
 						<td>
-							<input name="ab2[photo_align]" id="ab2_photo_align" type="checkbox" 
+							<input name="ab2[photo_align]" id="ab2_photo_align" type="checkbox"
 							       value="reverse"<?php checked('reverse', $this->_settings['ab2']['photo_align']) ?>>
 							<label for="ab2_photo_align">
 								<?php _e("Check this to align author's photo on the other side of the text.", $this->_slug);?>
@@ -130,8 +130,8 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 						</th>
 						<td>
 							<label for="ab2_personal_css">
-		<?php 
-		if( get_bloginfo( 'text_direction' ) == 'rtl' ) $rtltr = "rtl"; else $rtltr = "ltr"; 
+		<?php
+		if( get_bloginfo( 'text_direction' ) == 'rtl' ) $rtltr = "rtl"; else $rtltr = "ltr";
 		$authorboxcss = plugin_dir_url( __FILE__ ) . 'authorbox-'.$rtltr.'.css';
 		echo sprintf( __('If you choose to create your own personal CSS, first <a href="%s" target="_blank">download the original css</a>, change it and put your modifications in the text area bellow.', $this->_slug), $authorboxcss );
 		?>
@@ -178,7 +178,7 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 		if( !empty( $this->_appIcon ) ) {
 			$authorboxcss = plugin_dir_url( __FILE__ ) . 'authorbox-admin.css';
 			$version = uniqid (rand (),true);
-			echo "<link rel='stylesheet' id='authorbox-admin-css'  href='" . $authorboxcss . "?ver=" . $version . "' type='text/css' media='screen' />"; 
+			echo "<link rel='stylesheet' id='authorbox-admin-css'  href='" . $authorboxcss . "?ver=" . $version . "' type='text/css' media='screen' />";
 			// wp_enqueue_style( 'authorbox-admin', $authorboxcss, array (), $version, 'screen' );
 		}
 	}
@@ -186,23 +186,23 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 	public function authorbox_css() {
 		if( !empty( $this->_settings['ab2']['personal_css'] ) ) {
 	?>
-<style type="text/css"> 
+<style type="text/css">
 	/* Author Box CSS pesonalized by blog author */
 <?php echo $this->_settings['ab2']['personal_css']; ?>
 </style>
 	<?php
 		} else {
 			// This makes sure that the posinioning is also good for right-to-left languages
-			if( get_bloginfo( 'text_direction' ) == 'rtl' ) $rtltr = "rtl"; else $rtltr = "ltr"; 
+			if( get_bloginfo( 'text_direction' ) == 'rtl' ) $rtltr = "rtl"; else $rtltr = "ltr";
 			$authorboxcss = plugin_dir_url( __FILE__ ) . 'authorbox-'.$rtltr.'.css';
 			$version = uniqid (rand (),true);
-			echo "<link rel='stylesheet' id='authorbox-reloaded-css'  href='" . $authorboxcss . "?ver=" . $version . "' type='text/css' media='all' />"; 
+			echo "<link rel='stylesheet' id='authorbox-reloaded-css'  href='" . $authorboxcss . "?ver=" . $version . "' type='text/css' media='all' />";
 			// wp_enqueue_style( 'authorbox-reloaded', $authorboxcss, array (), $version, 'screen' );
 			if ( $this->_settings['ab2']['photo_align'] == 'reverse' ) {
 				echo "<!-- Reversed author photo -->";
 				if ( $rtltr == 'ltr' ) {
 	?>
-<style type="text/css"> 
+<style type="text/css">
 	#authorbox-photo {
 		background: #FFFFFF;
 		float: right;
@@ -214,7 +214,7 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 	<?php
 				} else {
 	?>
-<style type="text/css"> 
+<style type="text/css">
 	#authorbox-photo {
 		background: #FFFFFF;
 		float: left;
@@ -244,16 +244,15 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 
 		$author_photo = get_avatar( get_the_author_meta( 'user_email', $author ), '100', '', $author_name );
 		$author_photo = str_replace( '<img ', '<img id="authorbox-photo" title="'.$author_name.'"', $author_photo );
-                // __( "關於作者", $this->_slug ) 
+                // __( "關於作者", $this->_slug )
 		$box  = '	<div id="authorbox">'
 					.'		<div class="clearfix">'. $author_photo
 				    .'			<h3 id="About-' . str_replace( " ", "-", $author_name ) . '"><a href="/author/'.$username.'">' .$author_name. '</a></h3>'
 					.'			<p>'
-					.'				' . get_the_author_meta( 'description', $author ) . '</p>'
-					.'		</div>';
+					.'				' . get_the_author_meta( 'description', $author ) . '</p>';
 
 		// Author's external links
-		$socialinks = '				<li><a href="%s" rel="external" target="_blank"><img src="%s" title="%s" alt="logo image" /></a></li>';
+		$socialinks = '				<li><a href="%s" rel="external"><img src="%s" title="%s" alt="logo image" /></a></li>';
 
 		// Author's external profile site. Ex: Main Website
 		$profileurl = get_the_author_meta( 'user_url', $author );
@@ -282,23 +281,23 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 
 		// Make the External icons section
 		if( !empty($socialcontent)) {
-			$box .= '		<div id="socialinks" class="clear">' 
+			$box .= '		<div id="socialinks" class="clear" style="float:left;margin:0;">'
                         .'			<ul>'
-                        .'				<li>' . __("More at ", $this->_slug) . '&nbsp;</li>'
+                        //.'				<li>' . __("More at", $this->_slug) . '&nbsp;</li>'
                         . $socialcontent
                         .'			</ul>'
                         .'		</div>';
 		}
-	
-		$box .= '	</div>';
+
+		$box .= '	</div></div>';
 
 		return $box;
 	}
 
 	public function add_extra_contactmethod( $contactmethods ) {
-		
+
 		$this->_known_sites = apply_filters( 'authorbox_known_sites', $this->_known_sites );
-		
+
 		// Check to see if any External Contacts are active
 		if( !is_array( $this->_known_sites ) || ( @array_count_values( $this->_known_sites ) == 0 ) ) {
 			$notice = "<div id=\"message\" class=\"error fade\"><p><strong>Author Box Reloaded</strong></p><p>".
@@ -312,17 +311,17 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 				$cKey = strtolower( $this->_hook . '_' . str_replace( array_keys($replace), $replace, $key ) );
 				$contactmethods[$cKey] = $key;
 			}
-		
+
 			// remove Yahoo IM & AIM
 			unset($contactmethods['yim']);
 			unset($contactmethods['aim']);
 		}
-		
+
 		return $contactmethods;
-	}	
+	}
 
 	public function remove_extra_contactmethod( $contactmethods ) {
-		
+
 		$this->_known_sites = apply_filters( 'authorbox_known_sites', $this->_known_sites );
 
 		remove_filter( 'user_contactmethods', array( $this, 'add_extra_contactmethod' ), 10, 1);
@@ -339,9 +338,9 @@ class authorBox extends WordpressPluginFrameworkReloaded {
 		// Add Yahoo IM & AIM
 		$contactmethods['yim'] = 'Yahoo IM';
 		$contactmethods['aim'] = 'AIM';
-		
+
 		return $contactmethods;
-	}	
+	}
 
 	public function activate() {
 		$this->_settings['ab2']['auto_insert'] = 'yes';
