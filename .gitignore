@@ -1,2 +1,5 @@
 wp-content/uploads/
 *.tmp
+wp-content/js
+wp-content/css
+wp-content/cache
