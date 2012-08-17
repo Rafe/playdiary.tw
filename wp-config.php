@@ -22,7 +22,7 @@ define('DB_NAME', 'playdiary');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '22367417');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -33,6 +33,7 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+define('WP_CACHE', true);
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -85,6 +86,11 @@ define('WP_DEBUG', false);
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
   define('ABSPATH', dirname(__FILE__) . '/');
+
+if ( isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+  $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+  $_SERVER['REMOTE_ADDR'] = $ips[0];
+}
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
